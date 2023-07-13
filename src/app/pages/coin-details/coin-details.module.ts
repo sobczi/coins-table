@@ -10,6 +10,8 @@ import { CryptoTableStoreKey } from '@pages/crypto-table/models/CryptoTableStore
 import { CryptoTableReducer } from '@pages/crypto-table/store/crypto-table.reducer';
 import { CryptoTableService } from '@pages/crypto-table/services/crypto-table.service';
 
+// TODO: There should be some sort of parent module called e.g. Coins and it should have two children => Coins-Table, Coin-Details - not completely splitted like here it is now.
+
 @NgModule({
   declarations: [CoinDetailsComponent],
   imports: [
