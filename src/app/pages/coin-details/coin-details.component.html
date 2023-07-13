@@ -1,0 +1,7 @@
+<div *ngIf="chosenCoin$ | async as chosenCoin" class="coin-details">
+  {{ chosenCoin.name }}
+  <img
+    src="/assets/{{ chosenCoin.symbol.toLowerCase() }}.png"
+    alt="coin-icon"
+  />
+</div>

@@ -1,0 +1,12 @@
+.crypto-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+
+  .symbol-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

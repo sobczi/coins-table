@@ -1,0 +1,105 @@
+<!-- TODO: Add translations -->
+<!-- TODO: Add deafult icon for missing icons -->
+<!-- TODO: Add more colors & icons to prices to add more visibility for reflecting state of their change -->
+<!-- TODO: Style component according to FIGMA -->
+<!-- TODO: FavouriteIds probably shall be moved to some global store instead of holding it in CryptoTable if this functionality is applicable to more views -->
+<!-- TODO: Linters & formatters -->
+
+<div class="crypto-table">
+  <table
+    mat-table
+    [dataSource]="(coinsDetails$ | async) || []"
+    class="mat-elevation-z8"
+  >
+    <caption>
+      Crypto Coins Table
+    </caption>
+    <!-- Favourite column -->
+    <ng-container matColumnDef="favourite">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <app-favourite-button
+          [favouriteCoinsIds]="favouriteCoinsIds$ | async"
+          [coin]="element"
+          (coinFavouriteClick)="handleCoinFavouriteClick($event)"
+        ></app-favourite-button>
+      </td>
+    </ng-container>
+    <!-- Name column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="symbol-cell">
+          <img
+            src="/assets/{{ element.symbol.toLowerCase() }}.png"
+            alt="coin-icon"
+          />
+          {{ element.name }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Price column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.price }}
+      </td>
+    </ng-container>
+
+    <!-- Percent change 1h column -->
+    <ng-container matColumnDef="percent_change_1h">
+      <th mat-header-cell *matHeaderCellDef>Percent change 1h</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_1h }}%
+      </td>
+    </ng-container>
+
+    <!-- Percent change 24h column -->
+    <ng-container matColumnDef="percent_change_24h">
+      <th mat-header-cell *matHeaderCellDef>Percent change 24h</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_24h }}%
+      </td>
+    </ng-container>
+
+    <!-- Percent change 7d column -->
+    <ng-container matColumnDef="percent_change_7d">
+      <th mat-header-cell *matHeaderCellDef>Percent change 7d</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.percent_change_7d }}%
+      </td>
+    </ng-container>
+
+    <!-- Market cap column -->
+    <ng-container matColumnDef="market_cap">
+      <th mat-header-cell *matHeaderCellDef>Market cap</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.market_cap }}
+      </td>
+    </ng-container>
+
+    <!-- Volume column -->
+    <ng-container matColumnDef="volume_24h">
+      <th mat-header-cell *matHeaderCellDef>Volume</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.quotes.USD.volume_24h }}
+      </td>
+    </ng-container>
+
+    <!-- Circulating supply column -->
+    <ng-container matColumnDef="circulating_supply">
+      <th mat-header-cell *matHeaderCellDef>Circulating supply</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.circulating_supply }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      routerLink="/coin/{{ row.id }}"
+    ></tr>
+  </table>
+</div>

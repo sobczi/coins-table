@@ -1,0 +1,5 @@
+<mat-icon
+  *ngIf="favouriteCoinsIds && coin"
+  (click)="handleFavouriteClick($event)"
+  >{{ favouriteCoinsIds.includes(coin.id) ? "star" : "star_outline" }}</mat-icon
+>
